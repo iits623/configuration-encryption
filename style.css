@@ -17,16 +17,7 @@
   font-display: swap;
 }
 
-body,
-button,
-textarea,
-input,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+* {
   font-family: "Alibaba-Regular", sans-serif;
 }
 
@@ -125,7 +116,6 @@ textarea {
   height: 190px;
   resize: none;
   box-sizing: border-box;
-  font-family: "SF Mono", "Consolas", "Menlo", monospace;
   transition: all 0.2s;
 }
 
@@ -144,7 +134,6 @@ textarea:focus {
   height: 156px;
   text-align: left;
   width: 50%;
-  font-family: "SF Mono", "Consolas", "Menlo", monospace;
   transition: all 0.2s;
   overflow-y: auto;
 }
@@ -153,7 +142,6 @@ textarea:focus {
   white-space: pre-wrap;
   word-wrap: break-word;
   margin: 0;
-  font-family: "SF Mono", "Consolas", "Menlo", monospace;
   font-size: 0.9rem;
   color: #cbdbe6;
 }
@@ -198,22 +186,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-#install-btn {
-  margin-bottom: 2rem;
-  width: 90%;
-  padding: 1rem 0;
-  font-weight: 600;
-  background: #0f1a2c;
-  color: #c5deff;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 1px solid #2a4058;
-}
-
-#install-btn:hover {
-  background: #1a2e48;
-  transform: translateY(-1px);
-}
 
 textarea::-webkit-scrollbar {
   width: 8px;
