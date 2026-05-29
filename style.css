@@ -1,12 +1,17 @@
 :root {
-  --background-color: #050b14;
-  --text-color: #e8eef4;
-  --border-color: #1e2a3a;
-  --accent-color: #3b6ea0;
-  --button-bg: #0f1a2c;
-  --button-hover-bg: #1e2f44;
-  --input-bg: #0a111c;
-  --result-bg: #070d16;
+  --background-dark: #0a0505;
+  --background-card: #0f0a0a;
+  --text-primary: #f0e6e6;
+  --text-secondary: #c9a0a0;
+  --border-color: #2d1515;
+  --accent-red: #b81a10;
+  --accent-red-light: #e3352a;
+  --accent-red-dark: #8b1108;
+  --glow-red: rgba(184, 26, 16, 0.4);
+  --button-bg: #1a0b0a;
+  --button-hover-bg: #2d1512;
+  --input-bg: #0d0808;
+  --result-bg: #0a0606;
 }
 
 @font-face {
@@ -22,8 +27,8 @@
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background: #040202;
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,9 +36,38 @@ body {
   min-height: 100vh;
   margin: 0;
   font-size: 16px;
-  background: linear-gradient(145deg, #03070f 0%, #080f1a 100%);
+  background-image:
+    radial-gradient(
+      circle at 25% 0%,
+      rgba(184, 26, 16, 0.12) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 100%,
+      rgba(184, 26, 16, 0.08) 0%,
+      transparent 60%
+    ),
+    linear-gradient(145deg, #0a0505 0%, #050202 100%);
   padding: 1rem;
   box-sizing: border-box;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(184, 26, 16, 0.02) 2px,
+    rgba(184, 26, 16, 0.02) 6px
+  );
+  pointer-events: none;
 }
 
 .container {
@@ -51,12 +85,12 @@ header {
 header h1 {
   font-size: 2rem;
   margin-bottom: 0;
-  color: #d4e6ff;
+  background: linear-gradient(135deg, #fff5f5 0%, #e08583 50%, #b81a10 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   display: inline-block;
-  text-shadow:
-    0 0 8px rgba(59, 110, 160, 0.6),
-    0 0 15px rgba(59, 110, 160, 0.4),
-    0 0 25px rgba(59, 110, 160, 0.2);
+  text-shadow: 0 0 15px rgba(184, 26, 16, 0.3);
   position: relative;
 }
 
@@ -64,18 +98,19 @@ header h1::after {
   content: "";
   position: absolute;
   bottom: -8px;
-  left: 0;
-  width: 100%;
+  left: 25%;
+  width: 50%;
   height: 2px;
   background: linear-gradient(
     90deg,
-    transparent 0%,
-    #3b6ea0 20%,
-    #7bb3e0 50%,
-    #3b6ea0 80%,
-    transparent 100%
+    transparent,
+    #b81a10,
+    #e3352a,
+    #b81a10,
+    transparent
   );
   border-radius: 2px;
+  box-shadow: 0 0 6px #e3352a;
 }
 
 .tabs {
@@ -88,7 +123,7 @@ header h1::after {
 .tab-button {
   background: none;
   border: none;
-  color: #8e9eae;
+  color: var(--text-secondary);
   padding: 1rem 1.5rem;
   cursor: pointer;
   font-size: 1rem;
@@ -98,13 +133,13 @@ header h1::after {
 }
 
 .tab-button:hover {
-  color: #c5deff;
+  color: #e08583;
   opacity: 1;
 }
 
 .tab-button.active {
   opacity: 1;
-  color: #7bb3e0;
+  color: #e3352a;
 }
 
 .tab-button.active::after {
@@ -114,8 +149,8 @@ header h1::after {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #3b6ea0;
-  box-shadow: 0 0 6px #3b6ea0;
+  background-color: #e3352a;
+  box-shadow: 0 0 8px #e3352a;
 }
 
 .box-tab-content {
@@ -137,8 +172,8 @@ header h1::after {
 textarea {
   width: 50%;
   background-color: var(--input-bg);
-  color: var(--text-color);
-  border: 1px solid #1e3349;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.75rem;
   font-size: 0.9rem;
@@ -150,14 +185,16 @@ textarea {
 
 textarea:focus {
   outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 1px #3b6ea0;
+  border-color: #e3352a;
+  box-shadow:
+    0 0 0 1px #e3352a,
+    0 0 0 3px rgba(227, 53, 42, 0.15);
 }
 
 .result-box {
   position: relative;
   background-color: var(--result-bg);
-  border: 1px solid #1e3349;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 1rem;
   height: 156px;
@@ -172,7 +209,7 @@ textarea:focus {
   word-wrap: break-word;
   margin: 0;
   font-size: 0.9rem;
-  color: #cbdbe6;
+  color: #dfcece;
 }
 
 .result-box button {
@@ -182,20 +219,21 @@ textarea:focus {
   margin: 0;
   padding: 0.25rem 0.5rem;
   font-size: 0.8rem;
-  background-color: #111c2a;
-  border: 1px solid #2a4058;
+  background-color: #1a0b0a;
+  border: 1px solid #3a1a15;
   border-radius: 4px;
-  color: #bbd4ff;
+  color: #e08583;
 }
 
 .result-box button:hover {
-  background-color: #1a2a3e;
+  background-color: #2d1512;
+  color: #e3352a;
 }
 
 button {
   background-color: var(--button-bg);
-  color: var(--text-color);
-  border: 1px solid #1e3349;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -206,8 +244,10 @@ button {
 
 button:not(:disabled):hover {
   background-color: var(--button-hover-bg);
-  border-color: #3b6ea0;
+  border-color: #e3352a;
   transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(227, 53, 42, 0.3);
+  color: #fff0f0;
 }
 
 button:disabled {
@@ -221,20 +261,20 @@ textarea::-webkit-scrollbar {
 }
 
 textarea::-webkit-scrollbar-track {
-  background: #070d16;
+  background: #0a0606;
   border-radius: 10px;
   margin: 4px;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background: #1e3349;
+  background: #2d1515;
   border-radius: 10px;
   transition: all 0.2s;
 }
 
 textarea::-webkit-scrollbar-thumb:hover {
-  background: #3b6ea0;
-  box-shadow: 0 0 4px #3b6ea0;
+  background: #e3352a;
+  box-shadow: 0 0 4px #e3352a;
 }
 
 .result-box::-webkit-scrollbar {
@@ -243,20 +283,20 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 .result-box::-webkit-scrollbar-track {
-  background: #050a12;
+  background: #080505;
   border-radius: 10px;
   margin: 4px;
 }
 
 .result-box::-webkit-scrollbar-thumb {
-  background: #1e3349;
+  background: #2d1515;
   border-radius: 10px;
   transition: all 0.2s;
 }
 
 .result-box::-webkit-scrollbar-thumb:hover {
-  background: #3b6ea0;
-  box-shadow: 0 0 4px #3b6ea0;
+  background: #e3352a;
+  box-shadow: 0 0 4px #e3352a;
 }
 
 ::-webkit-scrollbar {
@@ -265,22 +305,22 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #050b14;
+  background: #0a0505;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e2a3a;
+  background: #2d1515;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b6ea0;
+  background: #e3352a;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1e3349 #070d16;
+  scrollbar-color: #2d1515 #0a0606;
 }
 
 .footer {
@@ -298,24 +338,24 @@ textarea::-webkit-scrollbar-thumb:hover {
   position: relative;
   text-align: center;
   padding: 0.75rem 1.5rem;
-  background: rgba(7, 13, 22, 0.6);
+  background: rgba(10, 5, 5, 0.7);
   backdrop-filter: blur(10px);
   border-radius: 50px;
-  border: 1px solid rgba(59, 110, 160, 0.3);
+  border: 1px solid rgba(184, 26, 16, 0.25);
   transition: all 0.3s ease;
   max-width: 90%;
 }
 
 .footer-content:hover {
-  border-color: rgba(59, 110, 160, 0.8);
-  box-shadow: 0 0 20px rgba(59, 110, 160, 0.2);
+  border-color: rgba(227, 53, 42, 0.6);
+  box-shadow: 0 0 20px rgba(184, 26, 16, 0.15);
   transform: translateY(-2px);
 }
 
 .footer-text {
   margin: 0;
   font-size: 0.9rem;
-  color: #8e9eae;
+  color: var(--text-secondary);
   letter-spacing: 0.5px;
   font-weight: 500;
   direction: rtl;
@@ -330,7 +370,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 .footer-link {
-  color: #7bb3e0;
+  color: #e08583;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.2s ease;
@@ -345,13 +385,13 @@ textarea::-webkit-scrollbar-thumb:hover {
   left: 0;
   width: 0%;
   height: 1px;
-  background: linear-gradient(90deg, #7bb3e0, #3b6ea0);
+  background: linear-gradient(90deg, #e08583, #e3352a);
   transition: width 0.3s ease;
 }
 
 .footer-link:hover {
-  color: #c5deff;
-  text-shadow: 0 0 8px rgba(59, 110, 160, 0.5);
+  color: #e3352a;
+  text-shadow: 0 0 6px rgba(227, 53, 42, 0.4);
 }
 
 .footer-link:hover::after {
@@ -365,7 +405,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   transform: translate(-50%, -50%);
   width: 90%;
   height: 90%;
-  background: radial-gradient(circle, rgba(59, 110, 160, 0.1), transparent);
+  background: radial-gradient(circle, rgba(184, 26, 16, 0.08), transparent);
   border-radius: 50px;
   pointer-events: none;
   opacity: 0;
@@ -408,7 +448,7 @@ textarea::-webkit-scrollbar-thumb:hover {
     width: 100%;
   }
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   header h1::after {
     bottom: -6px;
