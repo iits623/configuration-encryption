@@ -1,0 +1,300 @@
+/* ========== style.css ========== */
+:root {
+  --background-color: #050b14;
+  --text-color: #e8eef4;
+  --border-color: #1e2a3a;
+  --accent-color: #3b6ea0;
+  --button-bg: #0f1a2c;
+  --button-hover-bg: #1e2f44;
+  --input-bg: #0a111c;
+  --result-bg: #070d16;
+}
+
+@font-face {
+  font-family: "Alibaba-Regular";
+  src: url("assets/Alibaba-Regular.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body,
+button,
+textarea,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Alibaba-Regular", sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-size: 16px;
+  background: linear-gradient(145deg, #03070f 0%, #080f1a 100%);
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0rem;
+  color: #d4e6ff;
+  text-shadow: 0 0 8px rgba(59, 110, 160, 0.5);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  color: #8e9eae;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #c5deff;
+  opacity: 1;
+}
+
+.tab-button.active {
+  opacity: 1;
+  color: #7bb3e0;
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #3b6ea0;
+  box-shadow: 0 0 6px #3b6ea0;
+}
+
+.box-tab-content {
+  display: none;
+}
+
+.box-tab-content.active {
+  display: block;
+}
+
+.tab-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 150px;
+}
+
+textarea {
+  width: 50%;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid #1e3349;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  height: 190px;
+  resize: none;
+  box-sizing: border-box;
+  font-family: "SF Mono", "Consolas", "Menlo", monospace;
+  transition: all 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px #3b6ea0;
+}
+
+.result-box {
+  position: relative;
+  background-color: var(--result-bg);
+  border: 1px solid #1e3349;
+  border-radius: 6px;
+  padding: 1rem;
+  height: 156px;
+  text-align: left;
+  width: 50%;
+  font-family: "SF Mono", "Consolas", "Menlo", monospace;
+  transition: all 0.2s;
+  overflow-y: auto;
+}
+
+.result-box pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  font-family: "SF Mono", "Consolas", "Menlo", monospace;
+  font-size: 0.9rem;
+  color: #cbdbe6;
+}
+
+.result-box button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  background-color: #111c2a;
+  border: 1px solid #2a4058;
+  border-radius: 4px;
+  color: #bbd4ff;
+}
+
+.result-box button:hover {
+  background-color: #1a2a3e;
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid #1e3349;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+button:not(:disabled):hover {
+  background-color: var(--button-hover-bg);
+  border-color: #3b6ea0;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#install-btn {
+  margin-bottom: 2rem;
+  width: 90%;
+  padding: 1rem 0;
+  font-weight: 600;
+  background: #0f1a2c;
+  color: #c5deff;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #2a4058;
+}
+
+#install-btn:hover {
+  background: #1a2e48;
+  transform: translateY(-1px);
+}
+
+/* ========== اسکرول بارهای خوشگل سرمه‌ای ========== */
+
+/* اسکرول بار مخصوص textarea */
+textarea::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #070d16;
+  border-radius: 10px;
+  margin: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #1e3349;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #3b6ea0;
+  box-shadow: 0 0 4px #3b6ea0;
+}
+
+/* اسکرول بار مخصوص result-box */
+.result-box::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.result-box::-webkit-scrollbar-track {
+  background: #050a12;
+  border-radius: 10px;
+  margin: 4px;
+}
+
+.result-box::-webkit-scrollbar-thumb {
+  background: #1e3349;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.result-box::-webkit-scrollbar-thumb:hover {
+  background: #3b6ea0;
+  box-shadow: 0 0 4px #3b6ea0;
+}
+
+/* اسکرول بار عمومی برای کل سایت */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050b14;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2a3a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b6ea0;
+}
+
+/* فایرفاکس */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e3349 #070d16;
+}
+
+@media (max-width: 550px) {
+  .tab-content {
+    flex-direction: column;
+  }
+  .result-box {
+    width: 92%;
+  }
+  textarea {
+    width: 100%;
+  }
+}

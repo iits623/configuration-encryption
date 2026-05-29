@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>رمز نگاری فارسی کانفیگ</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <button id="install-btn" hidden>نصب برنامه</button>
+      <header>
+        <h1>فارسی ساز کانفیگ</h1>
+      </header>
+      <div class="tabs">
+        <button class="tab-button active" data-tab="encode">قاطی کردن</button>
+        <button class="tab-button" data-tab="decode">باز کردن</button>
+      </div>
+      <div class="content">
+        <div id="encode" class="box-tab-content active">
+          <div class="tab-content">
+            <textarea
+              id="encode-input"
+              placeholder="آدرس کانفیگ رو وارد کن..."
+            ></textarea>
+            <div class="result-box">
+              <pre id="encode-output"></pre>
+            </div>
+          </div>
+          <button id="encode-copy">کپی</button>
+        </div>
+        <div id="decode" class="box-tab-content">
+          <div class="tab-content">
+            <textarea
+              id="decode-input"
+              placeholder="آدرس قاطی شده رو وارد کن..."
+            ></textarea>
+            <div class="result-box">
+              <pre id="decode-output"></pre>
+            </div>
+          </div>
+          <button id="decode-copy">کپی</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
