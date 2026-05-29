@@ -20,21 +20,19 @@ export default async function handler(req, res) {
     const contentType =
       req.headers["content-type"] || "application/octet-stream";
 
-    // تغییر از 'public' به 'private'
     const blob = await put(
       `uploads/${Date.now()}_${Math.random().toString(36).substring(7)}`,
       buffer,
       {
-        access: "private", // این خط رو عوض کردم
+        access: "private",
         contentType: contentType,
       },
     );
 
-    // برگردوندن URL با token برای دسترسی
     res.status(200).json({
       success: true,
       url: blob.url,
-      downloadUrl: blob.downloadUrl, // این URL شامل token هست
+      downloadUrl: blob.downloadUrl,
       message: "فایل با موفقیت آپلود شد",
     });
   } catch (error) {
