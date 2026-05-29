@@ -8,6 +8,85 @@
     <title>آپلود فایل</title>
   </head>
   <body>
-    <input class="input-file" type="file" value="انتخاب و آپلود فایل" />
+    <input class="input-file" type="file" id="fileInput" />
+    <button
+      id="uploadBtn"
+      style="margin-right: 10px; padding: 8px 16px; cursor: pointer"
+    >
+      آپلود
+    </button>
+    <div
+      id="status"
+      style="margin-top: 15px; padding: 10px; border-radius: 5px; display: none"
+    ></div>
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const uploadBtn = document.getElementById("uploadBtn");
+      const statusDiv = document.getElementById("status");
+
+      function showStatus(message, isError = false) {
+        statusDiv.textContent = message;
+        statusDiv.style.display = "block";
+        statusDiv.style.backgroundColor = isError ? "#f8d7da" : "#d4edda";
+        statusDiv.style.color = isError ? "#721c24" : "#155724";
+        statusDiv.style.border = isError
+          ? "1px solid #f5c6cb"
+          : "1px solid #c3e6cb";
+
+        if (!isError) {
+          setTimeout(() => {
+            statusDiv.style.display = "none";
+          }, 4000);
+        }
+      }
+
+      uploadBtn.addEventListener("click", async () => {
+        const file = fileInput.files[0];
+
+        if (!file) {
+          showStatus("لطفاً یک فایل انتخاب کنید", true);
+          return;
+        }
+
+        if (file.size > 100 * 1024 * 1024) {
+          showStatus("حجم فایل نباید بیشتر از 100 مگابایت باشد", true);
+          return;
+        }
+
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = "در حال آپلود...";
+        showStatus("در حال آپلود فایل...");
+
+        try {
+          const response = await fetch("/api/upload", {
+            method: "POST",
+            body: file,
+            headers: {
+              "Content-Type": file.type || "application/octet-stream",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`خطا: ${response.status}`);
+          }
+
+          const result = await response.json();
+
+          if (result.success) {
+            showStatus(`✅ فایل "${file.name}" با موفقیت آپلود شد!`);
+            fileInput.value = "";
+          } else {
+            throw new Error(result.error || "خطای ناشناخته");
+          }
+        } catch (error) {
+          console.error("Upload error:", error);
+          showStatus(`❌ خطا: ${error.message}`, true);
+        } finally {
+          uploadBtn.disabled = false;
+          uploadBtn.textContent = "آپلود";
+        }
+      });
+    </script>
   </body>
 </html>

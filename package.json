@@ -1,0 +1,23 @@
+{
+  "name": "configuration-encryption",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iits623/configuration-encryption.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iits623/configuration-encryption/issues"
+  },
+  "homepage": "https://github.com/iits623/configuration-encryption#readme",
+  "dependencies": {
+    "@vercel/blob": "^2.4.0"
+  }
+}
